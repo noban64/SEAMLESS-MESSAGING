@@ -1,6 +1,6 @@
 # SEAMLESS MESSAGING
 
-باسمالله الرحمان الرحيم
+بسم الله الرحمان الرحيم
 
 Quick React/Rails Project to test out seamless messaging between two or more users.
 See the project on TOP (https://www.theodinproject.com/lessons/react-new-messaging-app) 
@@ -11,7 +11,7 @@ See the project on TOP (https://www.theodinproject.com/lessons/react-new-messagi
 ON 
 * Ruby 3.2.2
 
-*React 
+* React 
 
 ## Gems used
 * Devise (for automatic account creation) 
