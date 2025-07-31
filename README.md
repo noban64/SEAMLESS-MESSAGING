@@ -1,24 +1,32 @@
-# README
+# SEAMLESS MESSAGING
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+باسمالله الرحمان الرحيم
 
-Things you may want to cover:
+Quick React/Rails Project to test out seamless messaging between two or more users.
+See the project on TOP (https://www.theodinproject.com/lessons/react-new-messaging-app) 
 
-* Ruby version
+# Built with
 
-* System dependencies
+* Rails 8.0.2
+ON 
+* Ruby 3.2.2
 
-* Configuration
+*React 
 
-* Database creation
+## Gems used
+* Devise (for automatic account creation) 
+* Pagy (for pagination and search) 
 
-* Database initialization
+# License
 
-* How to run the test suite
+ Under standard MIT Licence -> see licence.txt for more information.
 
-* Services (job queues, cache servers, search engines, etc.)
+# Contact
 
-* Deployment instructions
+Hamdi/noban -- noban647@gmail.com
 
-* ...
+See the project: https://github.com/noban64/SEAMLESS-MESSAGING   
+
+# Acknowledgements
+
+ الله (SWT)
