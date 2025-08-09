@@ -1,0 +1,20 @@
+{
+  "name": "SEAMLESS_MESSAGING",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:noban64/SEAMLESS-MESSAGING.git",
+  "author": "Hamdi <32712674+noban64@users.noreply.github.com>",
+  "license": "MIT",
+  "dependencies": {
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
+    "react-router-dom": "^7.7.1"
+  },
+  "scripts": {
+    "build": "esbuild app/javascript/*.* --bundle --sourcemap --format=esm --outdir=app/assets/builds --public-path=/assets",
+    "build:css": "sass ./app/assets/stylesheets/application.bootstrap.scss:./app/assets/builds/application.css --no-source-map --load-path=node_modules"
+  },
+  "devDependencies": {
+    "esbuild": "^0.25.8"
+  }
+}

@@ -1,0 +1,7 @@
+<h1>This is the front page!</h1>
+<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus ratione veritatis, nam debitis velit officiis natus sequi officia libero iste labore quod minus ea vel facere nulla exercitationem sapiente repellat!</p>
+<%if user_signed_in? then %>
+  <%=link_to "sign out", destroy_user_session_path, data: {turbo_method: :delete, turbo_confirm: "Do you wish to sign out?"} %>
+<%else %>
+  <%=link_to "sign in", new_user_registration_path %>
+<%end%>
