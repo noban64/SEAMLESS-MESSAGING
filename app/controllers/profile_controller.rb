@@ -1,7 +1,7 @@
 class ProfileController < ApplicationController
   def profile
-      if User.exists?(params[:id]) then
-      @profile = User.find(params[:id])
+      if User.exists?(id: params[:id]) then #### BIG SQLI PROBLEM -> FIX IMMEDIATELY.
+          @profile = User.find(params[:id])
       else
         redirect_to root_path
       end
