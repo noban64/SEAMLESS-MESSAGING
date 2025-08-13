@@ -1,0 +1,9 @@
+<div id="send-message-partial">
+  <%=@test%>
+  <%="send_message partial!"%>
+</div>
+<%=form_with model: Message.new, url: "/chat", method: "create"  do |form| %>
+  <%=form.label "Message"%>
+  <%=form.text_field "Message"%>
+  <%=form.submit "Send"%>
+<%end%>

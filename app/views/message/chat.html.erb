@@ -1,15 +1,15 @@
 <h1>Message#chat</h1>
 <p>Find me in app/views/message/send.html.erb</p>
 <%if @messages then %>
-  <%=@messages.each do |message| %>
+  <%@messages.each do |message| %>
     <div>
       ---
       <div id="message"> <%="#{message.sender.email}: #{message.message}"%></div>
-      <div> <%=Time.strptime(message.created_at,"%d-%m")%></div>
-      %>
+      <div> <%=message.created_at%></div>
       --- 
     </div>
   <%end%>
 <%else%>
   <div> Send a message!</div>
 <%end%>
+<%=render "send_message"%>

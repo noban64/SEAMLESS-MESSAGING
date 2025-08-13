@@ -14,7 +14,8 @@ Rails.application.routes.draw do
 
   get "chat/:id" => "message#chat", as: "chat"
 
-
+  resource :chat, only: %w[show create destroy] do
+  end
   # defacto route
   root "front#index"
 end
