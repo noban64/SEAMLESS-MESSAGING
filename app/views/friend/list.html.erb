@@ -1,5 +1,12 @@
-<h1><%=current_user.email%>'s Friend list!</h1>
-<% @testlist.each do |friend| %>
-  <li><%=link_to friend.user.email, chat_path(friend)%></li>
-  <%#Temporary path%>
-<%end%>
+<html>
+  <head>
+    <title> <%= content_for :title, "Friends list" %></title>
+  </head>
+  <body>
+    <h1><%=current_user.email%>'s Friend list!</h1>
+    <% @testlist.each do |friend| %>
+      <li><%=link_to friend.user.email, chat_path(friend)%></li>
+      <%#Temporary path%>
+    <%end%>
+  </body>
+</html>

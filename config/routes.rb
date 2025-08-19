@@ -12,10 +12,13 @@ Rails.application.routes.draw do
 
   get "friends" => "friend#list"
 
-  get "chat/:id" => "message#chat", as: "chat"
+  # get "chat/:id" => "chat#show", as: "chat"
 
-  resource :chat, only: %w[show create destroy] do
+  # post "chat/:id/message/new" => "message#new", as: "new_message"
+  resources :chat, only: %w[show] do
+    resources :message, only: %w[new create]
   end
+  # end
   # defacto route
   root "front#index"
 end

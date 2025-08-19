@@ -1,24 +1,48 @@
 class MessageController < ApplicationController
   before_action :authenticate_user!
-  def chat
-    if current_user
-     @messages = Message.all.where(sender_id: current_user.id, receiver_id: params[:id]); # temporary receiver
-    end
+  def message
   end
-  def send_message
-    # @message = Message.create(sender_id: current_user_id, receiver_id: params[:id])
-    @test = "Hi, this is a testing variable!"
+  def new
+    @message = Message.new()
   end
   def create
-    @test = "test"
+    @test = "Hi, this is a testing variable!"
+
+    @message = Message.new(sender_id: current_user.id, receiver_id: params[:chat_id], message: params[:message][:msg])
+
+
+    # if @message.save then
+    #   puts ("--------")
+    #   puts ("Message: #{@message} has been saved")
+    #   puts ("--------")
+    # else
+    #   puts ("--------")
+    #   puts ("There was an error")
+    #   puts ("--------")
+    # end
+
+    begin
+      @message.save
+      puts ("--------")
+      puts (params[:msg])
+      puts ("--------")
+
+    rescue => error
+      puts ("--------")
+      puts (error)
+      puts ("--------")
+    end
+    redirect_to chat_path(params[:chat_id])
   end
+
   def read
     # decrypt the message
   end
   # private
-  # def message_params
-  # end
-  # def sanitise_params
-  #   sanitise(params[:message], tags: %w[b i u])
-  # end
+  def message_params
+    params.require(:message).permit(:msg)
+  end
+  def sanitise_params
+    sanitise(params[:message], tags: %w[b i u])
+  end
 end
