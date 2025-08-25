@@ -19,10 +19,28 @@ default: &default
   # https://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
+postgres: &postgres
+  adapter: postgresql
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  timeout: 5000
+
 
 development:
-  <<: *default
-  database: seamless_messaging_development
+  primary: 
+    <<: *default
+    database: seamless_messaging_development
+  cache:
+    <<: *postgres
+    database: seamless_messaging_development_cache
+    migrations_paths: db/cache_migrate
+  queue:
+    <<: *postgres
+    database: seamless_messaging_development_queue
+    migrations_paths: db/queue_migrate
+  cable:
+    <<: *postgres
+    database: seamless_messaging_development_cable
+    migrations_paths: db/cable_migrate
 
   # The specified database role being used to connect to PostgreSQL.
   # To create additional roles in PostgreSQL see `$ createuser --help`.

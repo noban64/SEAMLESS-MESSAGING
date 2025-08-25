@@ -7,32 +7,32 @@ class MessageController < ApplicationController
   end
   def create
     @test = "Hi, this is a testing variable!"
+      @current_chat = Chat.find(params[:chat_id])
+      if @current_chat.first_user.id == current_user.id || @current_chat.second_user.id == current_user.id
+      # might have to make sure the record exists beforehand
+      @message = Message.new({ chat_id: params[:chat_id], user_id: current_user.id }.merge(message: params[:message][:msg]))
+      # @message = Message.new({ chat_id: params[:chat_id], sender_id: current_user.id }.merge())
 
-    @message = Message.new(sender_id: current_user.id, receiver_id: params[:chat_id], message: params[:message][:msg])
+      begin
+        @message.save
+        puts ("--------")
+        puts (params[:msg])
+        puts ("--------")
 
-
-    # if @message.save then
-    #   puts ("--------")
-    #   puts ("Message: #{@message} has been saved")
-    #   puts ("--------")
-    # else
-    #   puts ("--------")
-    #   puts ("There was an error")
-    #   puts ("--------")
-    # end
-
-    begin
-      @message.save
-      puts ("--------")
-      puts (params[:msg])
-      puts ("--------")
-
-    rescue => error
-      puts ("--------")
-      puts (error)
-      puts ("--------")
-    end
-    redirect_to chat_path(params[:chat_id])
+      rescue => error
+        puts ("--------")
+        puts (@message.to_s())
+        puts (@message.errors.full_messages)
+        puts ("AN ERROR OCCURED!")
+        puts (error)
+        puts ("--------")
+      end
+      redirect_to chat_path(params[:chat_id])
+      # render json: {}, status: :no_content
+      else
+      flash[:notice] = "You dont belong in this chat!"
+      redirect_to root_path
+      end
   end
 
   def read

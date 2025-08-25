@@ -10,9 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_06_151016) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_23_195501) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+
+  create_table "chats", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.bigint "first_user_id", null: false
+    t.bigint "second_user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["first_user_id"], name: "index_chats_on_first_user_id"
+    t.index ["second_user_id"], name: "index_chats_on_second_user_id"
+  end
 
   create_table "friends", force: :cascade do |t|
     t.bigint "user_id", null: false
@@ -24,13 +33,13 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_06_151016) do
   end
 
   create_table "messages", force: :cascade do |t|
-    t.bigint "sender_id", null: false
-    t.bigint "receiver_id", null: false
+    t.uuid "chat_id", null: false
     t.string "message"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["receiver_id"], name: "index_messages_on_receiver_id"
-    t.index ["sender_id"], name: "index_messages_on_sender_id"
+    t.bigint "user_id", null: false
+    t.index ["chat_id"], name: "index_messages_on_chat_id"
+    t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -45,8 +54,10 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_06_151016) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "chats", "users", column: "first_user_id"
+  add_foreign_key "chats", "users", column: "second_user_id"
   add_foreign_key "friends", "users"
   add_foreign_key "friends", "users", column: "friend_id"
-  add_foreign_key "messages", "users", column: "receiver_id"
-  add_foreign_key "messages", "users", column: "sender_id"
+  add_foreign_key "messages", "chats"
+  add_foreign_key "messages", "users"
 end

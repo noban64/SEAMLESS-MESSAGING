@@ -1,14 +1,33 @@
 class ChatController < ApplicationController
   before_action :authenticate_user!
-  def show
-    # @message = Message.new(sender_id: current_user.id, receiver_id: params[:id], message: message_params)
-    @message = Message.new()
 
-    if User.exists?(id: params[:id]) && current_user
-     @combined_messages = (Message.all.where(sender_id: current_user.id, receiver_id: params[:id]).or(Message.all.where(receiver_id: current_user.id, sender_id: params[:id]))).order(created_at: :asc)
-     @user = User.find(params[:id])
+  def show
+    if Chat.exists?(id: params[:id])
+      @chat = Chat.find(params[:id])
+      if (@chat.first_user.id != current_user.id) && (@chat.second_user.id != current_user.id)
+        flash[:notice] = "How'd you get here?! You don't belong in this chat!"
+        redirect_to root_path
+      end
     else
-      flash[:notice] = "Who the hell are you trying to talk to? 🤣🤣🤣"
+      create()
+      # flash[:notice] = "This chat doesn't exist."
+      # redirect_to root_path
+    end
+  end
+
+  def new
+    @chat = Chat.new(first_user_id: current_user.id, second_user_id: params[:id])
+
+    render json: {}, status: 204
+  end
+
+  def create
+    @chat = Chat.new(first_user_id: current_user.id, second_user_id: params[:id])
+
+    if @chat.save then
+      redirect_to @chat
+    else
+      flash[:notice] = "There was an error starting the chat. Please try again."
       redirect_to root_path
     end
   end

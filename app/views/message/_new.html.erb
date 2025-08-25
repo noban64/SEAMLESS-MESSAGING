@@ -2,8 +2,9 @@
   <%=@test%>
   <%="send_message partial!"%>
 </div>
-<%=form_with model: @message, url: chat_message_index_path(params[:id]), method: "POST"  do |form| %>
+<%=form_with model: @chat.messages.build, url: chat_message_index_path(params[:id]), method: "POST"  do |form| %>
   <%=form.label "Message"%>
   <%=form.text_field :msg%>
   <%=form.submit "Send"%>
 <%end%>
+

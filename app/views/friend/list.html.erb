@@ -4,9 +4,15 @@
   </head>
   <body>
     <h1><%=current_user.email%>'s Friend list!</h1>
+    <%="This is a  list of EVERY person right now."%>
     <% @testlist.each do |friend| %>
-      <li><%=link_to friend.user.email, chat_path(friend)%></li>
+      <li><%=link_to friend.email, profile_path(friend)%></li>
       <%#Temporary path%>
     <%end%>
+    <%# <% @friends.each do |friend| %>
+      <%# <li><%=link_to friend.user.email, profile_path(friend)%></li>
+     %>
+    <%#Temporary path%>
+    <%# <%end%> %>
   </body>
 </html>

@@ -6,5 +6,16 @@ class ProfileController < ApplicationController
         flash[:notice] = "That user does not exist!"
         redirect_to root_path
       end
-  end
+
+      if Chat.exists?(first_user_id: current_user.id, second_user_id: params[:id])
+        @chat = Chat.where(first_user_id: current_user.id, second_user_id: params[:id])
+        @returned_chat = Chat.find(@chat)
+      elsif Chat.exists?(second_user_id: current_user.id, first_user_id: params[:id])
+        @chat = Chat.where(second_user_id: current_user.id, first_user_id: params[:id])
+        @returned_chat = Chat.find(@chat)
+      else
+        @returned_chat = nil
+
+      end
+end
 end

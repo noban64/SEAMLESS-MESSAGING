@@ -4,9 +4,11 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  # chat room
+  has_many :chat_rooms, class_name: "Chat", foreign_key: "first_user_id"
+  has_many :chat_rooms_alt, class_name: "Chat", foreign_key: "second_user_id"
   # send messages table
-  has_many :sent_messages, class_name: "Message", foreign_key: "sender_id"
-  has_many :received_messages, class_name: "Message", foreign_key: "receiver_id"
+  has_many :messages
 
   # friends list
   has_many :friends, class_name: "Friend", foreign_key: "friend_id" ##

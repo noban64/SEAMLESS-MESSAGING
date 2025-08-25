@@ -1,0 +1,7 @@
+<%if @profile.id != current_user.id%>
+  <%if @returned_chat != nil%>
+    <button><%=link_to "Chat with  #{@profile.email}", chat_path(@returned_chat)%> </button>
+  <%else%>
+    <button><%=link_to "Chat with  #{@profile.email}", chat_index_path, data: { turbo_method: :post} %> </button>
+  <%end%>
+<%end%>
