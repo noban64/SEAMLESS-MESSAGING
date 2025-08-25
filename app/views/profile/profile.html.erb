@@ -2,3 +2,8 @@
 <img src="#" alt="This is <%=@profile.email%>'s profile picture!">
 <h2>This is the user's bio!</h2>
 <%=render "chat_button"%>
+<%if current_user then%>
+  <div id="settings">
+    <%=link_to "Settings", edit_user_password_path%>
+  </div>
+<%end%>

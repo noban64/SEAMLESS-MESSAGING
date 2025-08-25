@@ -5,6 +5,11 @@
       ---
       <div id="message"> <%="#{message.user.email}: #{message.message}"%></div>
       <div> <%=time_ago_in_words((message.created_at)) + " ago"%></div>
+      <%if message.chat_images.attached?%>
+        <span>There's an image attached!</span>
+        <br />
+        <%= image_tag(message.chat_images.variant(:resize_attachment))%>
+      <%end%>
       --- 
     </div>
   <%end%>

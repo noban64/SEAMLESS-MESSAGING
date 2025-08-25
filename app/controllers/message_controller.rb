@@ -10,11 +10,13 @@ class MessageController < ApplicationController
       @current_chat = Chat.find(params[:chat_id])
       if @current_chat.first_user.id == current_user.id || @current_chat.second_user.id == current_user.id
       # might have to make sure the record exists beforehand
-      @message = Message.new({ chat_id: params[:chat_id], user_id: current_user.id }.merge(message: params[:message][:msg]))
-      # @message = Message.new({ chat_id: params[:chat_id], sender_id: current_user.id }.merge())
+      # @message = Message.new({ chat_id: params[:chat_id], user_id: current_user.id }.merge(message: params[:message][:msg], chat_images: params[:chat_images]))
+      @message = Message.new({ chat_id: params[:chat_id], user_id: current_user.id  }.merge(message_params))
 
       begin
         @message.save
+        @message.attach(params[:chat_images])
+
         puts ("--------")
         puts (params[:msg])
         puts ("--------")
@@ -40,7 +42,8 @@ class MessageController < ApplicationController
   end
   # private
   def message_params
-    params.require(:message).permit(:msg)
+    # params.require(:message).permit(:msg)
+    params.expect(message: [ :message, :chat_images ])
   end
   def sanitise_params
     sanitise(params[:message], tags: %w[b i u])

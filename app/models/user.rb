@@ -4,6 +4,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  #profile customisation
+  has_one_attached :profile_picture       
   # chat room
   has_many :chat_rooms, class_name: "Chat", foreign_key: "first_user_id"
   has_many :chat_rooms_alt, class_name: "Chat", foreign_key: "second_user_id"

@@ -17,5 +17,5 @@ class ProfileController < ApplicationController
         @returned_chat = nil
 
       end
-end
+  end
 end
