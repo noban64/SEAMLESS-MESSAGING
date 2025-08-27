@@ -9,9 +9,9 @@ class ChatController < ApplicationController
         redirect_to root_path
       end
     else
-      create()
-      # flash[:notice] = "This chat doesn't exist."
-      # redirect_to root_path
+      # create()
+      flash[:notice] = "This chat doesn't exist."
+      redirect_to root_path
     end
   end
 
@@ -24,11 +24,19 @@ class ChatController < ApplicationController
   def create
     @chat = Chat.new(first_user_id: current_user.id, second_user_id: params[:id])
 
-    if @chat.save then
+    begin
+      @chat.save
       redirect_to @chat
-    else
-      flash[:notice] = "There was an error starting the chat. Please try again."
-      redirect_to root_path
+
+    rescue => error
+      puts error
     end
+
+    # if @chat.save then
+    #   redirect_to @chat
+    # else
+    #   flash[:notice] = "There was an error starting the chat. Please try again."
+    #   redirect_to root_path
+    # end
   end
 end

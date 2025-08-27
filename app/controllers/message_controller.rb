@@ -1,36 +1,36 @@
 class MessageController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, :set_chat_room
   def message
+  end
+  def set_chat_room
+    @current_chat = Chat.find(params[:chat_id])
   end
   def new
     @message = Message.new()
   end
   def create
     @test = "Hi, this is a testing variable!"
-      @current_chat = Chat.find(params[:chat_id])
       if @current_chat.first_user.id == current_user.id || @current_chat.second_user.id == current_user.id
-      # might have to make sure the record exists beforehand
-      # @message = Message.new({ chat_id: params[:chat_id], user_id: current_user.id }.merge(message: params[:message][:msg], chat_images: params[:chat_images]))
-      @message = Message.new({ chat_id: params[:chat_id], user_id: current_user.id  }.merge(message_params))
+      @message = @current_chat.messages.build(message_params)
+      @message.user_id = current_user.id
 
-      begin
+        begin
         @message.save
-        @message.attach(params[:chat_images])
+        @message.attach(params[:chat_images]) if params[:chat_images] != nil
 
         puts ("--------")
-        puts (params[:msg])
+        puts (@message)
         puts ("--------")
 
       rescue => error
         puts ("--------")
-        puts (@message.to_s())
-        puts (@message.errors.full_messages)
+        print(@message.errors)
         puts ("AN ERROR OCCURED!")
         puts (error)
         puts ("--------")
       end
-      redirect_to chat_path(params[:chat_id])
-      # render json: {}, status: :no_content
+      redirect_to @current_chat
+      # render json: {}, status: :no_content  # i cant get websockets to work for some reason...
       else
       flash[:notice] = "You dont belong in this chat!"
       redirect_to root_path

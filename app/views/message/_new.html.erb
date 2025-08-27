@@ -1,9 +1,0 @@
-<div id="send-message-partial">
-  <%="send_message partial!"%>
-</div>
-<%=form_with model: @chat.messages.build, url: chat_message_index_path(params[:id]), method: "POST"  do |form| %>
-  <%=form.label "Message"%>
-  <%=form.text_field :message%>
-  <%=form.file_field :chat_images, direct_upload: true%>
-  <%=form.submit "Send"%>
-<%end%>

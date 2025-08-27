@@ -15,8 +15,8 @@ Rails.application.routes.draw do
   # get "chat/:id" => "chat#show", as: "chat"
 
   # post "chat/:id/message/new" => "message#new", as: "new_message"
-  resources :chat, only: %w[show new create] do
-    resources :message, only: %w[new create]
+  resources :chat, only: %w[show create] do
+    resources :message, only: %w[create]
   end
   # end
   # defacto route

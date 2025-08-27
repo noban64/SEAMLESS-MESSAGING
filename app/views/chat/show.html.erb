@@ -9,8 +9,13 @@
   <h2>
     <p> User BIO <%#=@user.bio%></p>
   </h2>
-  <%= turbo_stream_from @chat, "messages" %>
-  <div id="messages"><%=render "message/messages"%></div>
-  <%=render "message/new"%>
+  <h1>New Messages partial!</h1>
+  <%= turbo_stream_from "chat_#{@chat.id}_msg_box" %>
+  <div id="messages">
+    <%=render @chat.messages.order(created_at: :desc).limit(15) %>
+  </div>
+  <%=render "messages/new"%>
+  <h1>EONew Messages partial!</h1>
+  <h1>testing new form</h1>
 </body>
 </html>
