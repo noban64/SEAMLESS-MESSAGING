@@ -3,16 +3,18 @@
     <title> <%= content_for :title, "Friends list" %></title>
   </head>
   <body>
-    <h1><%=current_user.email%>'s Friend list!</h1>
-    <%="This is a  list of EVERY person right now."%>
-    <% @testlist.each do |friend| %>
-      <li><%=link_to friend.email, profile_path(friend)%></li>
-      <%#Temporary path%>
+    <%if @friends_list then%>
+      <% @friends_list.each do |friend| %>
+        <li><%=link_to friend.user.email, profile_path(friend)%> </li>
+      <%end%>
+    <%else%>
+      <h1><%=current_user.email%>'s Friend list!</h1>
+      <%="This is a  list of EVERY person right now."%>
+      <% @test_list.each do |friend| %>
+        <li><%=link_to friend.email, profile_path(friend)%></li>
+        <%#Temporary path%>r
+        <%=link_to "Maybe you should add some friends?", root_path ##should change the path to a search path%>
+      <%end%>
     <%end%>
-    <%# <% @friends.each do |friend| %>
-      <%# <li><%=link_to friend.user.email, profile_path(friend)%></li>
-     %>
-    <%#Temporary path%>
-    <%# <%end%> %>
   </body>
 </html>

@@ -4,8 +4,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  #profile customisation
-  has_one_attached :profile_picture       
+  # profile customisation
+  has_one_attached :profile_picture
   # chat room
   has_many :chat_rooms, class_name: "Chat", foreign_key: "first_user_id"
   has_many :chat_rooms_alt, class_name: "Chat", foreign_key: "second_user_id"
@@ -13,6 +13,13 @@ class User < ApplicationRecord
   has_many :messages
 
   # friends list
-  has_many :friends, class_name: "Friend", foreign_key: "friend_id" ##
-  has_one :user, class_name: "Friend", foreign_key: "user_id" ##
+  has_many :friends, class_name: "Friend", foreign_key: "user_id" ##
+  has_many :friendships, class_name: "Friend", foreign_key: "friend_id"
+  # has_many :inverse_friendships, inverse_of: :friendships, class_name: "Friend", foreign_key: "friend_id" ##
+  # has_many :inverse_friends, inverse_of: :friends, class_name: "Friend", foreign_key: "user_id" ##
+  # has_many :user, class_name: "Friend", foreign_key: "user_id" ##
+
+  # request list
+  has_many :requesting, class_name: "Request", foreign_key: "requesting_user_id"
+  has_many :requests, class_name: "Request", foreign_key: "user_id"
 end
