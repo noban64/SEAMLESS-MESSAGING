@@ -14,7 +14,7 @@ class MessageController < ApplicationController
       @message = @current_chat.messages.build(message_params)
       @message.user_id = current_user.id
 
-        begin
+      begin
         @message.save
         @message.attach(params[:chat_images]) if params[:chat_images] != nil
 
@@ -42,7 +42,6 @@ class MessageController < ApplicationController
   end
   # private
   def message_params
-    # params.require(:message).permit(:msg)
     params.expect(message: [ :message, :chat_images ])
   end
   def sanitise_params
