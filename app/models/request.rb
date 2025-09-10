@@ -2,7 +2,7 @@ class Request < ApplicationRecord
   belongs_to :requesting_user, class_name: "User"
   belongs_to :user, class_name: "User"
 
-  after_initialize :init
+  before_create :init
 
   def init
     puts (self.to_s)
