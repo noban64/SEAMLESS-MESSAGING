@@ -29,13 +29,13 @@ class FriendController < ApplicationController
   # end
 
   def destroy
-  begin
-    friendship = Friend.find(@friendship)
-    friendship.destroy
-  rescue => error
-    puts error
-  end
-  flash[:notice] = "Friend successfully deleted!"
-  redirect_to profile_path(@requested_user)
+    begin
+      friendship = Friend.find(@friendship)
+      friendship.destroy
+    rescue => error
+      puts error
+    end
+    flash[:notice] = "Friend successfully deleted!"
+    redirect_to profile_path(@requested_user)
   end
 end

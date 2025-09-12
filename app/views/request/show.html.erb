@@ -22,6 +22,9 @@
             </li>
           <%end%>
         </ul>
+        <div id="Pagination">
+          <%== pagy_nav(@pagy) if @pagy.pages > 1 %>
+        </div>
       <%else%>
         <span>Your requests are empty! Hooray?</span>
       <%end%>

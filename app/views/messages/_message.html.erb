@@ -2,7 +2,9 @@
   <div class="message-user"> <%="#{message.user.email}"%></div>
   <div class="message-time"> <%="|  #{time_ago_in_words((message.created_at))} ago"%></div>
 </div>
-<div class="message"> <%=message.message%></div>
+<div class="message">
+  <%=message.message%>
+</div>
 <%if message.chat_images.attached?%>
   <div class='message_image'><%= image_tag message.chat_images.variant(:resize_attachment)%></div>
 <%end%>

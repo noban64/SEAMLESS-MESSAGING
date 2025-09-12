@@ -9,7 +9,6 @@ class MessageController < ApplicationController
     @message = Message.new()
   end
   def create
-    @test = "Hi, this is a testing variable!"
       if @current_chat.first_user.id == current_user.id || @current_chat.second_user.id == current_user.id
       @message = @current_chat.messages.build(message_params)
       @message.user_id = current_user.id
@@ -25,7 +24,6 @@ class MessageController < ApplicationController
       rescue => error
         puts ("--------")
         print(@message.errors)
-        puts ("AN ERROR OCCURED!")
         puts (error)
         puts ("--------")
       end

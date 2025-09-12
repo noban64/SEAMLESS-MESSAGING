@@ -1,10 +1,10 @@
 <%@chat = Chat.first%>
 <h1>New Messages partial!</h1>
-<%if @chat.second_user%>
-  <div>HELLO!</div>
-<%end%>
+<div class="Pagination">
+  <%== pagy_nav(@pagy) if @pagy.pages > 1 %>
+</div>
 <%if @chat.messages then %>
-  <%@chat.messages.order(created_at: :asc).each do |message| %>
+  <%@chat.messages.order(created_at: :asc).limit(10).offset(((@pagy.page*10)if (@pagy.page != 1))).each do |message| %>
     <div class="user-time-box" style="display:flex">
       <div class="message-user"> <%="#{message.user.email}"%></div>
       <div class="message-time"> <%="|  #{time_ago_in_words((message.created_at))} ago"%></div>

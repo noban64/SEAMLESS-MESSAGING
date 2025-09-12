@@ -52,6 +52,7 @@ class RequestController < ApplicationController
   def show
     puts "show controller"
     @requests = Request.where(user_id: current_user.id, denied: false)
+    @pagy, @records = pagy(@requests)
   end
 
   def create

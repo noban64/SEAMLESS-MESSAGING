@@ -4,15 +4,19 @@
   </head>
   <body>
     <h1>
-      | <%=@chat.first_user.email%> | is chatting with | <%=@chat.second_user.email%> |</h1>
+      | <%=@chat.first_user.email%> and <%=@chat.second_user.email%> are chatting |</h1>
   </h1>
   <h2>
     <p> User BIO <%#=@user.bio%></p>
   </h2>
   <h1>New Messages partial!</h1>
   <%= turbo_stream_from "chat_#{@chat.id}_msg_box" %>
+  <div class="Pagination">
+    <%== pagy_nav(@pagy) if @pagy.pages > 1 %>
+  </div>
   <div id="messages">
-    <%=render @chat.messages.order(created_at: :desc).limit(15) %>
+    <%=render @chat_messages.limit(10).offset((((@pagy.page-1)*10)if (@pagy.page != 1 || @pagy.page !=0)))%>
+    <%# <%=render "messages/message"%> %>
   </div>
   <%=render "messages/new"%>
   <h1>EONew Messages partial!</h1>
