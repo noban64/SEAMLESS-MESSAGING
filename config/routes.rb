@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
   get "profile/:id" => "profile#profile", as: "profile"
 
+  get "search" => "search#show", as: "search"
 
   resources :friend, only: %w[show create destroy]
   resources :profile, only: %w[show] do
@@ -15,7 +16,6 @@ Rails.application.routes.draw do
       post "/decision", to: "request#request_decision"
     end
   end
-
 
   get "chat/create" => "chat#create", as: "chat_creation"
   resources :chat, only: %w[show create] do

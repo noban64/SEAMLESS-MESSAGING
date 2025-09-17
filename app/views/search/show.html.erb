@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= content_for?(:page_title) ? yield(:page_title) : "Search" %></title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+  </head>
+  <body>
+    <div id="results-box">
+      <ul id="list-of-people">
+        <%if @results.empty?%>
+          <div>There's nobody by that name</div>
+        <%else%>
+          <%@results.each do |user|%>
+            <li><%=link_to user.email, profile_path(user)%></li>
+          <%end%>
+        <%end%>
+      </ul>
+    </body>
+  </html>

@@ -28,6 +28,7 @@
           <li><%=link_to "Friends", friend_path(current_user) %></li>
           <li><%=link_to "Me",profile_path(current_user)%></li>
           <li><%=button_to "Sign out", destroy_user_session_path, method: :delete,data: { turbo_confirm: "Do you wish to sign out?"} %></li>
+          <li><%=render "search/search"%></li>
         <%else %>
           <li><%=link_to "Sign in", user_session_path %></li>
         <%end%>

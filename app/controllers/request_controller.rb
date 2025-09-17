@@ -91,7 +91,7 @@ class RequestController < ApplicationController
       puts ("Friend request was accepted!")
       create_friend() unless @already_friends
     end
-      redirect_to profile_request_path(current_user.id) and return
+      redirect_to profile_request_path(id: current_user.id) and return
   end
 
   def create_friend
