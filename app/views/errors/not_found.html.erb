@@ -3,7 +3,11 @@
     <title> <%= content_for :title, "Not found." %></title>
   </head>
   <body>
-    <%#  %>
-    <h2>404</h2>
-    <%#  %>
-    <h1>Requested resource not found, maybe you should go <%=link_to "home?", root_path%></h1>
+    <div class="header">
+      <h2>404</h2>
+    </div>
+    <div class="main-content">
+      <h1>Requested resource not found, maybe you should go <%=link_to "home?", root_path%></h1>
+    </div>
+  </body>
+</html>

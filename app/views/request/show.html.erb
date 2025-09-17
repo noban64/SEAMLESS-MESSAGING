@@ -6,28 +6,30 @@
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
-    <% ## variables 
-     accept = true
-     decline = false %>
   </head>
   <body>
-    <div id="request-box">
-      <%if @requests then%>
-        <ul id="request-list">
-          <%@requests.each do |req|%>
-            <li class="request">
-              <%=req.requesting_user.email%>
-              <%=button_to "Accept", profile_request_decision_path(decision: true, request_id: req), method: :post %>
-              <%=button_to "Decline",profile_request_decision_path(decision: false, request_id: req), method: :post %>
-            </li>
-          <%end%>
-        </ul>
-        <div id="Pagination">
-          <%== pagy_nav(@pagy) if @pagy.pages > 1 %>
-        </div>
-      <%else%>
-        <span>Your requests are empty! Hooray?</span>
-      <%end%>
+    <div class="header">
+      <h1><%=current_user.email%>'s Requests</h1>
+    </div>
+    <div class="main-content">
+      <div id="request-box">
+        <%if @requests then%>
+          <ul id="request-list">
+            <%@requests.each do |req|%>
+              <li class="request">
+                <%=req.requesting_user.email%>
+                <%=button_to "Accept", profile_request_decision_path(decision: true, request_id: req), method: :post %>
+                <%=button_to "Decline",profile_request_decision_path(decision: false, request_id: req), method: :post %>
+              </li>
+            <%end%>
+          </ul>
+          <div id="Pagination">
+            <%== pagy_nav(@pagy) if @pagy.pages > 1 %>
+          </div>
+        <%else%>
+          <span>Your requests are empty! Hooray?</span>
+        <%end%>
+      </div>
     </div>
   </body>
 </html>

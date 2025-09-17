@@ -8,18 +8,23 @@
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
   </head>
   <body>
-    <div id="results-box">
-      <ul id="list-of-people">
-        <%if @results.empty?%>
-          <div>There's nobody by that name</div>
-        <%else%>
-          <%@results.each do |user|%>
-            <li><%=link_to user.email, profile_path(user)%></li>
+    <div class="header">
+      <%=render "search/search"%>
+    </div>
+    <div class="main-content">
+      <div id="results-box">
+        <ul id="list-of-people">
+          <%if @results.empty?%>
+            <div>There's nobody by that name</div>
+          <%else%>
+            <%@results.each do |user|%>
+              <li><%=link_to user.email, profile_path(user)%></li>
+            <%end%>
           <%end%>
-        <%end%>
-      </ul>
-      <div class="Pagination">
-        <%== pagy_nav(@pagy) if @pagy.pages > 1 %>
+        </ul>
+        <div class="Pagination">
+          <%== pagy_nav(@pagy) if @pagy.pages > 1 %>
+        </div>
       </div>
     </body>
   </html>

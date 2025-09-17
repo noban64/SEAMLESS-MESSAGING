@@ -3,23 +3,21 @@
     <title> <%= content_for :title, "Chat: #{@chat.first_user.email} and #{@chat.first_user.email}" %></title>
   </head>
   <body>
-    <h1>
+    <div class="header">
       | <%=@chat.first_user.email%> and <%=@chat.second_user.email%> are chatting |</h1>
-  </h1>
-  <h2>
-    <p> User BIO <%#=@user.bio%></p>
-  </h2>
-  <h1>New Messages partial!</h1>
-  <%= turbo_stream_from "chat_#{@chat.id}_msg_box" %>
-  <div class="Pagination">
-    <%== pagy_nav(@pagy) if @pagy.pages > 1 %>
+    <h1>
+    </h1>
   </div>
-  <div id="messages">
-    <%=render @chat_messages.limit(10).offset((((@pagy.page-1)*10)if (@pagy.page != 1 || @pagy.page !=0)))%>
-    <%# <%=render "messages/message"%> %>
+  <div class="main-content">
+    <%= turbo_stream_from "chat_#{@chat.id}_msg_box" %>
+    <div class="Pagination">
+      <%== pagy_nav(@pagy) if @pagy.pages > 1 %>
+    </div>
+    <div id="messages">
+      <%=render @chat_messages.limit(10).offset((((@pagy.page-1)*10)if (@pagy.page != 1 || @pagy.page !=0)))%>
+      <%# <%=render "messages/message"%> %>
+    </div>
+    <%=render "messages/new"%>
   </div>
-  <%=render "messages/new"%>
-  <h1>EONew Messages partial!</h1>
-  <h1>testing new form</h1>
 </body>
 </html>

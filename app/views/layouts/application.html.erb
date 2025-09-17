@@ -20,21 +20,23 @@
   </head>
   <body>
     <%# TESTING %>
-    <div style="border: 1px solid black;">
-      Navigation Panel (Test)
+    <div id="navigation-panel">
       <ul>
         <li><%=link_to "Home", root_path %></li>
         <%if user_signed_in? then %>
           <li><%=link_to "Friends", friend_path(current_user) %></li>
           <li><%=link_to "Me",profile_path(current_user)%></li>
+          <li><%=link_to "Search",search_path%></li>
           <li><%=button_to "Sign out", destroy_user_session_path, method: :delete,data: { turbo_confirm: "Do you wish to sign out?"} %></li>
-          <li><%=render "search/search"%></li>
         <%else %>
           <li><%=link_to "Sign in", user_session_path %></li>
         <%end%>
       </ul>
     </div>
     <%= render "layouts/notices"%>
-    <%= yield %>
+    <div class="main-body">
+      <%= yield %>
+      <%=render "layouts/footer"%>
+    </div>
   </body>
 </html>

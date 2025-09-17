@@ -4,20 +4,26 @@
     <title> <%= content_for :title, "Friends list" %></title>
   </head>
   <body>
-    <ul>
-      <%if !@friends_list.empty? then%>
-        <% @friends_list.each do |friend| %>
-          <li><%=link_to friend.user.email, profile_path(friend.user_id)%> </li>
-        <%end %>
-      <%else%>
-        <h1><%=current_user.email%>'s Friend list!</h1>
-        <%="This is a  list of EVERY person right now."%>
-        <%@test_list.each do |friend| %>
-          <li><%=link_to friend.email, profile_path(friend)%></li>
+    <div class="header">
+      <h1> <%=current_user.email%>'s Friends:</h1>
+    </div>
+    <div class="main-content">
+      <ul>
+        <%if !@friends_list.empty? then%>
+          <% @friends_list.each do |friend| %>
+            <li><%=link_to friend.user.email, profile_path(friend.user_id)%> </li>
+          <%end %>
+        <%else%>
+          <%# <%="This is a  list of EVERY person right now."%> %>
+          <%# <%@test_list.each do |friend| %> %>
+            <%# <li><%=link_to friend.email, profile_path(friend)%></li>
+           %>
           <%#Temporary path%>
+          <%# <%end%> %>
+          <p>Its empty.. 😂😂😂😂😂</p>
+          <%=link_to "Maybe you should add some friends?", search_path%> 
         <%end%>
-        <%=link_to "Maybe you should add some friends?", root_path%> ##should change the path to a search path
-      <%end%>
-    </ul>
+      </ul>
+    </div>
   </body>
 </html>
