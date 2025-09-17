@@ -5,6 +5,9 @@ class SearchController < ApplicationController
     if @results.nil? then
       return nil
     end
+
+    @pagy, @records = pagy(@results)
+
     @results
   end
 
