@@ -5,7 +5,10 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   # profile customisation
-  has_one_attached :profile_picture
+  has_one_attached :profile_picture  do |pfp|
+    pfp.variant :base_profile_picture, resize_to_limit: [ 250, 250 ]
+    pfp.variant :message_profile_picture, resize_to_limit: [ 100, 100 ]
+  end
   # chat room
   has_many :chat_rooms, class_name: "Chat", foreign_key: "first_user_id"
   has_many :chat_rooms_alt, class_name: "Chat", foreign_key: "second_user_id"

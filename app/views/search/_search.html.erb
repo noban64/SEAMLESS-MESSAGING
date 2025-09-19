@@ -1,4 +1,6 @@
-<%=form_with url: search_path , method: :get do |form|%>
-  <%=form.text_field :user_name, placeholder: "Search for a user"%>
-  <%=form.button "Search"%>
-<%end%>
+<div id="search-box">
+  <%=form_with url: search_path , method: :get do |form|%>
+    <%=form.text_field :user_name, placeholder: "Search for a user", id: "user-name"%>
+    <%=form.button "Search", id: "submit-button"%>
+  <%end%>
+</div>

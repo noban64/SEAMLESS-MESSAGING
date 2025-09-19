@@ -1,0 +1,33 @@
+.header {
+  padding: 10%;
+}
+.main-content {
+}
+#search-box {
+}
+#user-name,
+#submit-button {
+  border: 0.5px solid black;
+  height: 100%;
+  width: 100%;
+}
+
+#results-box {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  padding: 10%;
+  border: 1px solid rgba(0, 0, 0, 0.35);
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
+}
+
+#results-box > * {
+  list-style: none;
+  text-transform: uppercase;
+}
+
+#user-name {
+  width: 100%;
+  height: 100%;
+}
