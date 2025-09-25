@@ -1,23 +1,23 @@
 <html>
   <head>
     <title> <%= content_for :title, "Chat: #{@chat.first_user.email} and #{@chat.first_user.email}" %></title>
+    <%= stylesheet_link_tag "chat", "data-turbo-track": "reload" %>
   </head>
   <body>
     <div class="header">
-      | <%=@chat.first_user.email%> and <%=@chat.second_user.email%> are chatting |</h1>
-    <h1>
-    </h1>
-  </div>
-  <div class="main-content">
-    <%= turbo_stream_from "chat_#{@chat.id}_msg_box" %>
-    <div class="Pagination">
-      <%== pagy_nav(@pagy) if @pagy.pages > 1 %>
+      <h1>
+        <%=@chat.first_user.email%> : <%=@chat.second_user.email%>
+      </h1>
     </div>
-    <div id="messages">
-      <%=render @chat_messages.limit(10).offset((((@pagy.page-1)*10)if (@pagy.page != 1 || @pagy.page !=0)))%>
-      <%# <%=render "messages/message"%> %>
+    <div class="main-content">
+      <%= turbo_stream_from "chat_#{@chat.id}_msg_box" %>
+      <div class="Pagination">
+        <%== pagy_nav(@pagy) if @pagy.pages > 1 %>
+      </div>
+      <div id="messages">
+        <%=render @chat_messages.limit(10).offset((((@pagy.page-1)*10)if (@pagy.page != 1 || @pagy.page !=0)))%>
+      </div>
+      <%=render "messages/new"%>
     </div>
-    <%=render "messages/new"%>
-  </div>
-</body>
+  </body>
 </html>

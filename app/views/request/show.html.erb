@@ -4,7 +4,7 @@
     <title><%= content_for?(:page_title) ? yield(:page_title) : "Requests list" %></title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "request", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
   </head>
   <body>
@@ -14,22 +14,26 @@
     <div class="main-content">
       <div id="request-box">
         <%if @requests then%>
-          <ul id="request-list">
+          <div id="request-list">
             <%@requests.each do |req|%>
-              <li class="request">
-                <%=req.requesting_user.email%>
+              <div class="request">
+                <div class="profile-picture-searched">
+                  <%= image_tag req.requesting_user.profile_picture.variant(:searched_profile_picture) if req.requesting_user.profile_picture.attached? %>
+                </div>
+                <%=link_to req.requesting_user.email, profile_path(req.requesting_user)%>
                 <%=button_to "Accept", profile_request_decision_path(decision: true, request_id: req), method: :post %>
                 <%=button_to "Decline",profile_request_decision_path(decision: false, request_id: req), method: :post %>
-              </li>
+              </div>
             <%end%>
-          </ul>
-          <div id="Pagination">
-            <%== pagy_nav(@pagy) if @pagy.pages > 1 %>
           </div>
-        <%else%>
-          <span>Your requests are empty! Hooray?</span>
-        <%end%>
-      </div>
+        </div>
+        <div id="Pagination">
+          <%== pagy_nav(@pagy) if @pagy.pages > 1 %>
+        </div>
+      <%else%>
+        <span>Your requests are empty! Hooray?</span>
+      <%end%>
     </div>
-  </body>
+  </div>
+</body>
 </html>

@@ -4,28 +4,35 @@
     <title><%= content_for?(:page_title) ? yield(:page_title) : "Search" %></title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "search", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
   </head>
   <body>
     <div class="header">
-      <%=render "search/search"%>
+      <div id="search-bar">
+        <%=render "search/search"%>
+      </div>
     </div>
     <div class="main-content">
+      <u>
+        <h2 >RESULTS</h2>
+      </u>
       <div id="results-box">
-        <ul id="list-of-people">
+        <div id="list-of-people">
           <%if @results.empty?%>
             <div>There's nobody by that name</div>
           <%else%>
             <%@results.each do |user|%>
-              <li><%=link_to user.email, profile_path(user)%></li>
+              <div class="searched-user">
+                <div class="profile-picture-searched"><%= image_tag user.profile_picture.variant(:searched_profile_picture) if user.profile_picture.attached? %></div>
+                <span><%=link_to user.email, profile_path(user)%></span> <br/>
+              </div>
             <%end%>
           <%end%>
-        </ul>
-        <div class="Pagination">
-          <%== pagy_nav(@pagy) if @pagy.pages > 1 %>
         </div>
+      </div>
+      <div class="Pagination">
+        <%== pagy_nav(@pagy) if @pagy.pages > 1 %>
       </div>
     </div>
   </body>

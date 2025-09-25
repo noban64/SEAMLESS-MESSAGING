@@ -14,7 +14,7 @@
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/icon.png">
     <%# Includes all stylesheet files in app/assets/stylesheets %>
-    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
   </head>
@@ -27,7 +27,7 @@
           <li><%=link_to "Friends", friend_path(current_user) %></li>
           <li><%=link_to "Me",profile_path(current_user)%></li>
           <li><%=link_to "Search",search_path%></li>
-          <li><%=button_to "Sign out", destroy_user_session_path, method: :delete,data: { turbo_confirm: "Do you wish to sign out?"} %></li>
+          <li><%=button_to "Sign out", destroy_user_session_path, method: :delete,data: { turbo_confirm: "Do you wish to sign out?"}, id: "sign-out-button" %></li>
         <%else %>
           <li><%=link_to "Sign in", user_session_path %></li>
         <%end%>

@@ -1,0 +1,31 @@
+#message-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
+  padding: 2%;
+  margin: 2%;
+  background-color: #1c1c1c;
+}
+#message-actions > * {
+  padding: 1%;
+}
+
+.user-time-box {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
+}
+
+#send-message-partial {
+  width: 60%;
+}
+.message {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

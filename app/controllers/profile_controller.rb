@@ -28,4 +28,11 @@ class ProfileController < ApplicationController
         redirect_to root_path
       end
   end
+
+  def profile_picture
+    if params[:profile_pic] != nil then 
+      current_user.attach(params[:profile_pic])
+    end
+  end
 end
+

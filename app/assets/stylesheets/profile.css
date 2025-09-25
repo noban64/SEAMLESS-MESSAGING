@@ -1,0 +1,34 @@
+#profile-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0% 5%;
+}
+
+.header {
+  padding: 5% 0%;
+}
+#pfp-image > img {
+  border-radius: 50%;
+}
+
+#pfp-image {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#bio {
+  text-align: center;
+}
+
+#settings {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#settings > * {
+  padding: 1%;
+}

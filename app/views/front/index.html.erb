@@ -10,11 +10,7 @@
       <p>Friendship plays a vital role in our lives, offering support, laughter, and a sense of belonging. Whether it's a lifelong companion or a new acquaintance, meaningful relationships enrich our personal and emotional well-being. In today’s fast-paced world, staying connected to those who matter most is more important than ever.</p>
       <p>Social media has transformed how we build and maintain friendships. It allows us to stay in touch with friends across the globe, share life’s moments instantly, and discover new connections through shared interests. What once required letters or long-distance calls now happens in real time, making relationships more accessible and dynamic.</p>
       <p>In an age where digital interaction is a daily part of life, social media serves as a powerful tool for cultivating friendships. It helps people overcome distance, stay updated on each other’s lives, and engage in communities that reflect their values and passions. This platform isn’t just about sharing content—it’s about creating meaningful bonds that last</p>
-      <%if user_signed_in? then %>
-        <%=link_to "sign out", destroy_user_session_path, data: {turbo_method: :delete, turbo_confirm: "Do you wish to sign out?"} %>
-      <%else %>
-        <%=link_to "sign in", new_user_registration_path %>
-      <%end%>
+
     </div>
   </body>
 </html>

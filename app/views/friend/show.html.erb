@@ -1,29 +1,27 @@
-<!DOCTYPE html>>
+<!DOCTYPE html>
 <html>
   <head>
     <title> <%= content_for :title, "Friends list" %></title>
+    <%= stylesheet_link_tag "friends", "data-turbo-track": "reload"%>
+
   </head>
   <body>
     <div class="header">
       <h1> <%=current_user.email%>'s Friends:</h1>
     </div>
     <div class="main-content">
-      <ul>
-        <%if !@friends_list.empty? then%>
-          <% @friends_list.each do |friend| %>
-            <li><%=link_to friend.user.email, profile_path(friend.user_id)%> </li>
-          <%end %>
-        <%else%>
-          <%# <%="This is a  list of EVERY person right now."%> %>
-          <%# <%@test_list.each do |friend| %> %>
-            <%# <li><%=link_to friend.email, profile_path(friend)%></li>
-           %>
-          <%#Temporary path%>
-          <%# <%end%> %>
-          <p>Its empty.. 😂😂😂😂😂</p>
-          <%=link_to "Maybe you should add some friends?", search_path%> 
-        <%end%>
-      </ul>
+      <div id="list">
+        <ul>
+          <%if !@friends_list.empty? then%>
+            <% @friends_list.each do |friend| %>
+              <li><%=link_to friend.user.email, profile_path(friend.user_id)%> </li>
+            <%end %>
+          <%else%>
+            <p>Its empty.. 😂😂😂😂😂</p>
+            <%=link_to "Maybe you should add some friends?", search_path%>
+          <%end%>
+        </ul>
+      </div>
     </div>
   </body>
 </html>

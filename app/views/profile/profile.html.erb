@@ -1,26 +1,39 @@
-<div class="header">
-  <%if @profile.profile_picture.attached?%>
-    <div class='pfp_image'><%= image_tag @profile.profile_picture.variant(:resize_attachment)%></div>
-  <%end%>
-  <h1><%=@profile.email%> </h1>
-</div>
-<div class="main-content">
-  <h2>This is the user's bio!</h2>
-  <%if @profile.id === current_user.id then%>
-    <div id="settings">
-      <%=link_to "Settings", edit_user_password_path%>
-      <%=link_to "Requests", profile_request_path(@profile)%>
+<html>
+  <head>
+    <title> <%= content_for :title, "#{@profile.username}" ||  "#{@profile.email}" %></title>
+    <%= stylesheet_link_tag "profile", "data-turbo-track": "reload" %>
+  </head>
+  <body>
+    <div class="header">
+      <div id="profile-header">
+        <%if @profile.profile_picture.attached?%>
+          <div id='pfp-image'><%= image_tag @profile.profile_picture.variant(:base_profile_picture)%></div>
+        <%end%>
+        <h1><%=@profile.email%> </h1>
+        <h2><%=@profile.username%> </h2>
+      </div>
     </div>
-  <%else%>
-    <div id="request">
-      <% if !@request_exists%>
-        <%=button_to "Add friend", profile_request_index_path(profile_id: @profile.id), method: :post%>
-      <% elsif @request_exists && !@already_friends%>
-        <%=button_to "Pending"%>
-      <% elsif @already_friends%>
-        <%=button_to "Remove friend", friend_path(friend_data: @profile), method: :delete%>
+    <div class="main-content">
+      <div id='bio'>
+        <h2><%=@profile.bio || "#{@profile.username} doesn't have a bio yet!"%></h2>
+      </div>
+      <%if @profile.id === current_user.id then%>
+        <div id="settings">
+          <%=link_to "Settings", edit_user_registration_path%>
+          <%=link_to "Requests", profile_request_path(@profile)%>
+        </div>
+      <%else%> 
+        <div id="request">
+          <% if !@request_exists%>
+            <%=button_to "Add friend", profile_request_index_path(profile_id: @profile.id), method: :post%>
+          <% elsif @request_exists && !@already_friends%>
+            <%=button_to "Pending"%>
+          <% elsif @already_friends%>
+            <%=button_to "Remove friend", friend_path(friend_data: @profile), method: :delete%>
+          <%end%>
+        </div>
+        <%=render "chat_button"%>
       <%end%>
     </div>
-    <%=render "chat_button"%>
-  <%end%>
-</div>
+  </body>
+</html>
