@@ -13,14 +13,8 @@ class ChatController < ApplicationController
   def show
     if Chat.exists?(id: params[:id])
       @chat = Chat.find(params[:id])
-      # if params[:page] == 0
-      #   @page_number_offset = 10
-      # else
-      #   @page_number_offset = params[:page]*10
-      # end
       @chat_messages = @chat.messages.order(created_at: :desc)
       @pagy, @records = pagy(@chat_messages, items: 10)
-      # @pagy, @records = pagy(@chat.messages.order(created_at: :desc), items: 10)
 
 
 
@@ -43,7 +37,8 @@ class ChatController < ApplicationController
   def create
     if Chat.exists?(@chat_one) || Chat.exists?(@chat_two)
       @chat = Chat.find(@chat_one) || Chat.find(@chat_two)
-      puts ("Chat is already created. Redirecting to: " + @chat.id)
+      puts ("Chat is already created. Redirecting to: #{@chat.id}")
+
       redirect_to @chat
     else
       begin

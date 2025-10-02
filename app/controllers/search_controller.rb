@@ -21,9 +21,9 @@ class SearchController < ApplicationController
     end
 
     similar_results = similar_named_results
-    if User.where("email LIKE ?", similar_results[0])
+    if User.exists?("email LIKE ?", similar_results[0])
       @results = User.where("email LIKE ?", similar_results[0])
-    elsif User.where("email LIKE ?", similar_results[1])
+    elsif User.exists?("email LIKE ?", similar_results[1])
       @results = User.where("email LIKE ?", similar_results[1])
     end
   end
