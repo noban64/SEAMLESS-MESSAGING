@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: "user_edit/registrations" }
 
   match "404" => "errors#not_found", via: :all
-  match "500" => "errors#server_errors", via: :all
+  match "500" => "errors#server_error", via: :all
 
   get "home" => "front#index"
 
