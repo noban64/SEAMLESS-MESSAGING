@@ -1,9 +1,9 @@
 <div id="send-message-partial">
   <%=form_with model: @chat.messages.build,url: chat_message_index_path(@chat), data: {controller: "reset-form", action: "turbo:submit-end->reset-form#reset" } do |form| %>
     <div id="message-actions">
-      <%=form.text_field :message, placeholder: "Send a message"%>
-      <%=form.file_field :chat_images, direct_upload: true, placeholder: "Upload Image"%>
-      <%=form.submit "Send"%>
+      <%=form.text_field :message, placeholder: "Send a message",id: "input_message"%>
+      <%=form.file_field :chat_images, direct_upload: true, placeholder: "Upload Image", id: "input_image"%>
+      <%=form.submit "Send",id: "send_message"%>
     </div>
   <%end%>
 </div>

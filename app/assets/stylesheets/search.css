@@ -1,5 +1,5 @@
 .header {
-  padding: 10%;
+  padding: 2%;
 }
 #search-bar {
   width: 100%;
@@ -20,16 +20,16 @@
 
 #results-box {
   display: flex;
-  justify-content: left;
-  align-content: center;
-  padding: 10%;
-  margin: 10%;
+  justify-content: flex-start;
+  align-content: flex-start;
+  padding: 2%;
   border: 1px solid rgba(0, 0, 0, 0.35);
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
 }
 #list-of-people {
   width: 100%;
+  align-items: flex-start;
 }
 #results-box > * {
   list-style: none;
@@ -44,7 +44,7 @@
 .searched-user {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
 }
 .profile-picture-searched {
   height: 50px;

@@ -5,27 +5,55 @@
   border: 1px solid rgba(0, 0, 0, 0.05);
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
-  padding: 2%;
+  padding: 1%;
   margin: 2%;
   background-color: #1c1c1c;
+  width: 80vw;
 }
 #message-actions > * {
   padding: 1%;
 }
-
-.user-time-box {
+#messages {
   display: flex;
-  justify-content: space-evenly;
-  width: 100%;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
+  flex-direction: column-reverse;
+  width: 80vw;
+}
+#input_message {
+  width: 75%;
+}
+#input_image {
+  color: white;
+}
+#input_image > button {
+  border: none;
+  background-color: blue;
 }
 
+.message-time {
+  display: flex;
+  align-items: center;
+  font-size: 0.7em;
+  font-weight: bold;
+  margin-left: 1%;
+}
+.user-time-box {
+  display: flex;
+  justify-content: left;
+  width: 100%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.005);
+}
+
+.messages-box {
+  display: flex;
+  justify-content: left;
+}
 #send-message-partial {
-  width: 60%;
+  width: 100%;
 }
 .message {
   display: flex;
+  margin-left: 1%;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
 }
