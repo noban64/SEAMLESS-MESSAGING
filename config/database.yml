@@ -99,7 +99,7 @@ test:
 production:
   primary: &primary_production
     <<: *default
-    url: <%= ENV["DATABASE_URL"]=>
+    url: <%= ENV["DATABASE_URL"] %>
     database: seamless_messaging_production
     username: seamless_messaging
     password: <%= ENV["SEAMLESS_MESSAGING_DATABASE_PASSWORD"] %>
